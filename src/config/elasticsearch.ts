@@ -9,11 +9,11 @@ const client = new Client({
   node: process.env.ELASTICSEARCH_HOST,
   auth: {
     username: process.env.ELASTICSEARCH_USER,
-    password: process.env.ELASTICSEARCH_PASSWORD
+    password: process.env.ELASTICSEARCH_PASSWORD,
   },
   tls: {
-    rejectUnauthorized: false // Ignoring SSL certificate issues as mentioned in the requirements
-  }
+    rejectUnauthorized: false, // Ignoring SSL certificate issues as mentioned in the requirements
+  },
 });
 
 // Test the connection
@@ -33,8 +33,4 @@ checkConnection();
 
 const index = process.env.ELASTICSEARCH_INDEX;
 
-export {
-  client,
-  checkConnection,
-  index
-};
+export { client, checkConnection, index };

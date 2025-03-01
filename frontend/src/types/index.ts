@@ -43,6 +43,6 @@ export interface AnalyticsResults {
     cacheCount: number;
     averageResponseTime: number;
     averageResponseTimeCached: number;
-    topKeywords: Array<{keyword: string; count: number}>;
+    topKeywords: Array<{ keyword: string; count: number }>;
   };
 }

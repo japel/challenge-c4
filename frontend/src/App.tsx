@@ -13,25 +13,26 @@ const App: React.FC = () => {
       padding="md"
       styles={{
         main: {
-          background: '#f9fafb'
-        }
+          background: '#f9fafb',
+        },
       }}
     >
       <AppShell.Header>
         <Header />
       </AppShell.Header>
-      
+
       <AppShell.Main>
         <Routes>
           <Route path="/" element={<SearchPage />} />
           <Route path="/analytics" element={<AnalyticsPage />} />
         </Routes>
       </AppShell.Main>
-      
+
       <AppShell.Footer p="md">
         <Box ta="center">
           <Text size="sm" c="dimmed">
-            IMAGO Media Search © {new Date().getFullYear()} - Built with React, TypeScript, and Mantine UI
+            IMAGO Media Search © {new Date().getFullYear()} - Built with React, TypeScript, and
+            Mantine UI
           </Text>
         </Box>
       </AppShell.Footer>

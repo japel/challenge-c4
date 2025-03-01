@@ -12,23 +12,23 @@ const SearchPage: React.FC = () => {
     page: 1,
     limit: 12,
     sortBy: 'datum',
-    sortOrder: 'desc'
+    sortOrder: 'desc',
   });
-  
+
   // Use the search hook with React Query for caching
   const { data, isLoading, isError } = useSearch(searchParams);
-  
+
   // Handle search submit
   const handleSearch = useCallback((params: SearchParams) => {
     // Reset to page 1 when search criteria changes
     setSearchParams({ ...params, page: 1 });
   }, []);
-  
+
   // Handle pagination
   const handlePageChange = useCallback((page: number) => {
     setSearchParams(prev => ({ ...prev, page }));
   }, []);
-  
+
   return (
     <Container size="lg" py="xl">
       <Stack gap="lg">
@@ -36,9 +36,9 @@ const SearchPage: React.FC = () => {
           <Title order={1}>IMAGO Media Search</Title>
           <Text c="dimmed">Search through IMAGO's extensive media library</Text>
         </div>
-        
+
         <SearchForm onSearch={handleSearch} isLoading={isLoading} />
-        
+
         <SearchResults
           results={data as SearchResultsType | undefined}
           isLoading={isLoading}

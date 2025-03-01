@@ -6,9 +6,9 @@ jest.mock('../src/config/elasticsearch', () => {
   return {
     client: {
       search: jest.fn(),
-      info: jest.fn()
+      info: jest.fn(),
     },
-    index: 'imago'
+    index: 'imago',
   };
 });
 
@@ -32,7 +32,7 @@ describe('Analytics API', () => {
       (analyticsService.getAverageResponseTimeCached as jest.Mock).mockReturnValue(250);
       (analyticsService.getTopKeywords as jest.Mock).mockReturnValue([
         { keyword: 'test', count: 5 },
-        { keyword: 'image', count: 3 }
+        { keyword: 'image', count: 3 },
       ]);
 
       const response = await request(app).get('/api/analytics');

@@ -10,7 +10,7 @@ const AnalyticsPage: React.FC = () => {
           <Title order={1}>IMAGO Search Analytics</Title>
           <Text c="dimmed">View usage statistics and performance metrics</Text>
         </div>
-        
+
         <Analytics />
       </Stack>
     </Container>

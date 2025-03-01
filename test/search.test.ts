@@ -7,9 +7,9 @@ jest.mock('../src/config/elasticsearch', () => {
   return {
     client: {
       search: jest.fn(),
-      info: jest.fn()
+      info: jest.fn(),
     },
-    index: 'imago'
+    index: 'imago',
   };
 });
 
@@ -34,16 +34,14 @@ describe('Search API', () => {
                 fotografen: 'Test Photographer',
                 datum: '01.01.2023',
                 hoehe: '1000',
-                breite: '1000'
-              }
-            }
-          ]
-        }
+                breite: '1000',
+              },
+            },
+          ],
+        },
       });
 
-      const response = await request(app)
-        .get('/api/search')
-        .query({ q: 'test' });
+      const response = await request(app).get('/api/search').query({ q: 'test' });
 
       expect(response.status).toBe(200);
       expect(response.body.success).toBe(true);
@@ -55,9 +53,7 @@ describe('Search API', () => {
       // Mock an Elasticsearch error
       (client.search as jest.Mock).mockRejectedValueOnce(new Error('Elasticsearch error'));
 
-      const response = await request(app)
-        .get('/api/search')
-        .query({ q: 'test' });
+      const response = await request(app).get('/api/search').query({ q: 'test' });
 
       expect(response.status).toBe(500);
       expect(response.body.success).toBe(false);

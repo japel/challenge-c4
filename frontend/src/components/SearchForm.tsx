@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { 
-  TextInput, 
-  Button, 
-  Group, 
-  Card, 
-  Select, 
-  Grid, 
+import {
+  TextInput,
+  Button,
+  Group,
+  Card,
+  Select,
+  Grid,
   Box,
   Collapse,
   Tooltip,
-  Text
+  Text,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { SearchParams } from '../types';
@@ -25,7 +25,7 @@ const initialSearchParams: SearchParams = {
   sortBy: '',
   sortOrder: '',
   page: 1,
-  limit: 12
+  limit: 12,
 };
 
 interface SearchFormProps {
@@ -36,24 +36,24 @@ interface SearchFormProps {
 const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
   const [searchParams, setSearchParams] = useState<SearchParams>(initialSearchParams);
   const [opened, { toggle }] = useDisclosure(false);
-  
+
   // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSearch(searchParams);
   };
-  
+
   // Handle input changes
   const handleChange = (name: keyof SearchParams, value: string | number | boolean) => {
     setSearchParams(prev => ({ ...prev, [name]: value }));
   };
-  
+
   // Handle reset
   const handleReset = () => {
     setSearchParams(initialSearchParams);
     onSearch(initialSearchParams);
   };
-  
+
   return (
     <Card withBorder shadow="sm" radius="md" p="md" mb="xl">
       <form onSubmit={handleSubmit}>
@@ -64,7 +64,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
               placeholder="Search across title and caption fields (e.g. Manchester, Jackson...)"
               size="md"
               value={searchParams.q || ''}
-              onChange={(e) => handleChange('q', e.target.value)}
+              onChange={e => handleChange('q', e.target.value)}
               styles={{
                 input: {
                   '&:focus': {
@@ -75,7 +75,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
             />
           </Grid.Col>
         </Grid>
-        
+
         <Collapse in={opened}>
           <Box mt="md">
             <Grid>
@@ -84,7 +84,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
                   label="Photographer"
                   placeholder="Filter by photographer"
                   value={searchParams.photographer || ''}
-                  onChange={(e) => handleChange('photographer', e.target.value)}
+                  onChange={e => handleChange('photographer', e.target.value)}
                 />
               </Grid.Col>
               <Grid.Col span={{ base: 12, md: 6 }}>
@@ -92,7 +92,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
                   label="Restrictions"
                   placeholder="Filter by restrictions"
                   value={searchParams.restrictions || ''}
-                  onChange={(e) => handleChange('restrictions', e.target.value)}
+                  onChange={e => handleChange('restrictions', e.target.value)}
                 />
               </Grid.Col>
               <Grid.Col span={{ base: 12, sm: 6 }}>
@@ -100,7 +100,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
                   label="Date From"
                   placeholder="DD.MM.YYYY"
                   value={searchParams.dateFrom || ''}
-                  onChange={(e) => handleChange('dateFrom', e.target.value)}
+                  onChange={e => handleChange('dateFrom', e.target.value)}
                 />
               </Grid.Col>
               <Grid.Col span={{ base: 12, sm: 6 }}>
@@ -108,7 +108,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
                   label="Date To"
                   placeholder="DD.MM.YYYY"
                   value={searchParams.dateTo || ''}
-                  onChange={(e) => handleChange('dateTo', e.target.value)}
+                  onChange={e => handleChange('dateTo', e.target.value)}
                 />
               </Grid.Col>
               <Grid.Col span={{ base: 12, sm: 6 }}>
@@ -116,12 +116,12 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
                   label="Sort By"
                   placeholder="Select a field to sort by (default: relevance)"
                   value={searchParams.sortBy || ''}
-                  onChange={(value) => handleChange('sortBy', value || '')}
+                  onChange={value => handleChange('sortBy', value || '')}
                   data={[
                     { value: '', label: 'Relevance' },
                     { value: 'datum', label: 'Date' },
                     { value: 'bildnummer', label: 'Image Number' },
-                    { value: 'fotografen', label: 'Photographer' }
+                    { value: 'fotografen', label: 'Photographer' },
                   ]}
                   clearable
                 />
@@ -131,10 +131,10 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
                   label="Sort Order"
                   placeholder="Select a sort order (default: descending)"
                   value={searchParams.sortOrder || ''}
-                  onChange={(value) => handleChange('sortOrder', value || '')}
+                  onChange={value => handleChange('sortOrder', value || '')}
                   data={[
                     { value: 'desc', label: 'Descending' },
-                    { value: 'asc', label: 'Ascending' }
+                    { value: 'asc', label: 'Ascending' },
                   ]}
                   clearable
                   disabled={!searchParams.sortBy} // Only enable if sortBy is selected
@@ -143,34 +143,24 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
             </Grid>
           </Box>
         </Collapse>
-        
+
         <Group justify="space-between" mt="lg">
-          <Tooltip label={opened ? "Hide advanced filters" : "Show advanced filters"}>
-            <Button 
-              variant="subtle" 
-              color="gray" 
+          <Tooltip label={opened ? 'Hide advanced filters' : 'Show advanced filters'}>
+            <Button
+              variant="subtle"
+              color="gray"
               onClick={toggle}
-              leftSection={
-                <Text size="xl">{opened ? '−' : '+'}</Text>
-              }
+              leftSection={<Text size="xl">{opened ? '−' : '+'}</Text>}
             >
               {opened ? 'Less filters' : 'More filters'}
             </Button>
           </Tooltip>
-          
+
           <Group>
-            <Button 
-              variant="outline" 
-              color="gray" 
-              onClick={handleReset}
-              disabled={isLoading}
-            >
+            <Button variant="outline" color="gray" onClick={handleReset} disabled={isLoading}>
               Reset
             </Button>
-            <Button 
-              type="submit" 
-              loading={isLoading}
-            >
+            <Button type="submit" loading={isLoading}>
               Search
             </Button>
           </Group>

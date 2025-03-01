@@ -14,7 +14,7 @@ router.get('/', (req: Request, res: Response): void => {
   const averageResponseTime = analyticsService.getAverageResponseTime();
   const averageResponseTimeCached = analyticsService.getAverageResponseTimeCached();
   const topKeywords = analyticsService.getTopKeywords();
-  
+
   res.json({
     success: true,
     data: {
@@ -22,8 +22,8 @@ router.get('/', (req: Request, res: Response): void => {
       cacheCount,
       averageResponseTime,
       averageResponseTimeCached,
-      topKeywords
-    }
+      topKeywords,
+    },
   });
 });
 
